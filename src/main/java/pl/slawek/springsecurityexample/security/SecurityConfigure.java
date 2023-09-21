@@ -32,7 +32,7 @@ class SecurityConfigure {
     SecurityFilterChain buildChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize  -> authorize
-                            .requestMatchers("/").permitAll()
+                            .requestMatchers("/", "/swagger-ui/index.html","/api-docs").permitAll()
                             .requestMatchers("/user").hasAnyRole("USER", "ADMIN")
                             .requestMatchers("/admin", "/register/**").hasRole("ADMIN"))
                 .formLogin(Customizer.withDefaults())
