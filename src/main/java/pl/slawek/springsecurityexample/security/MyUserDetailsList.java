@@ -5,7 +5,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,5 +24,9 @@ class MyUserDetailsList {
         users.add(new User("admin",
                 passwordEncoder.encode("admin"),
                 Collections.singleton(new SimpleGrantedAuthority("ROLE_ADMIN"))));
+    }
+
+    List<User> getUsers() {
+        return users;
     }
 }

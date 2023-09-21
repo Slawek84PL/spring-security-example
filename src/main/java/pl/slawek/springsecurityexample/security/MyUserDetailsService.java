@@ -12,15 +12,15 @@ import java.util.List;
 class MyUserDetailsService implements UserDetailsService {
 
 
-    private final MyUserDetailsList users;
+    private final MyUserDetailsList myUserDetailsList;
 
-    MyUserDetailsService(final MyUserDetailsList users) {
-        this.users = users;
+    MyUserDetailsService(final MyUserDetailsList myUserDetailsList) {
+        this.myUserDetailsList = myUserDetailsList;
     }
 
     @Override
     public UserDetails loadUserByUsername(final String username) {
-        List<User> userList = users.users;
+        List<User> userList = myUserDetailsList.getUsers();
 
         for (User user : userList) {
             if (user.getUsername().equals(username)) {
