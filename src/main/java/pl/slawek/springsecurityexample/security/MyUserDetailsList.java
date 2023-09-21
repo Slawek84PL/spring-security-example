@@ -29,4 +29,12 @@ class MyUserDetailsList {
     List<User> getUsers() {
         return users;
     }
+
+    User createUser(final String username, final String pass) {
+        User user = new User(username,
+                passwordEncoder.encode(pass),
+                Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")));
+        users.add(user);
+        return user;
+    }
 }
