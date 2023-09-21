@@ -21,6 +21,6 @@ class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-        return new User("user", passwordEncoder.encode("user"), Collections.singleton(new SimpleGrantedAuthority("USER")));
+        return new User("user", passwordEncoder.encode("user"), Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")));
     }
 }
