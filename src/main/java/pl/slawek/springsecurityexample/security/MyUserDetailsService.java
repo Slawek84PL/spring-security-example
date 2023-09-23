@@ -24,7 +24,10 @@ class MyUserDetailsService implements UserDetailsService {
 
         for (User user : userList) {
             if (user.getUsername().equals(username)) {
-                return user;
+                return new User(user.getUsername(), user.getPassword(),
+                        true, true,
+                        true, true,
+                        user.getAuthorities());
             }
             }
         throw new UsernameNotFoundException("Nie znaleziono użytkownika");
