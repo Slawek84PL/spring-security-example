@@ -1,14 +1,14 @@
 package pl.slawek.springsecurityexample.security;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-class ExampleController {
+@RequestMapping("/")
+public class ExampleController {
 
     private final MyUserDetailsList userDetailsList;
 
@@ -16,7 +16,7 @@ class ExampleController {
         this.userDetailsList = userDetailsList;
     }
 
-    @GetMapping("/")
+    @GetMapping()
     public String getHome() {
         return "<h1>Home Page<h1>";
     }
@@ -33,10 +33,15 @@ class ExampleController {
         return "<h1>Admin Page<h1>";
     }
 
-    @GetMapping("/register/{username}/{pass}")
+    @PostMapping("/register/{username}/{pass}")
     public String createUser(@PathVariable String username, @PathVariable String pass) {
         User user = userDetailsList.createUser(username, pass);
         return String.format("<h1>Created:<h1><br> <h1>UserName: %s Password: %s Rola: %s<h1><br> " +
                 "możesz zalogować się na to konto", user.getUsername(), user.getPassword(), user.getAuthorities());
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<String> getUsers() {
+        return ResponseEntity.ok(userDetailsList.getUsers().toString());
     }
 }
