@@ -33,7 +33,7 @@ class SecurityConfigure {
                             .anyRequest().authenticated())
                 .authenticationProvider(provider)
                 .formLogin(loginConfigurer -> loginConfigurer
-                        .loginPage("/login").permitAll())
+                        .loginPage("/api/v1/login").permitAll())
                 .logout(logoutConfigurer -> logoutConfigurer.logoutSuccessUrl("/"));
         return http.build();
     }
