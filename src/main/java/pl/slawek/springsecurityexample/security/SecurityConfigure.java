@@ -32,7 +32,8 @@ class SecurityConfigure {
                             .requestMatchers(HttpMethod.POST,"/register/{username}/{pass}").hasRole("ADMIN")
                             .anyRequest().authenticated())
                 .authenticationProvider(provider)
-                .formLogin(Customizer.withDefaults())
+                .formLogin(loginConfigurer -> loginConfigurer
+                        .loginPage("/api/v1/login").permitAll())
                 .logout(logoutConfigurer -> logoutConfigurer.logoutSuccessUrl("/"));
         return http.build();
     }
